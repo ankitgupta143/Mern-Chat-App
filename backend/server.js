@@ -1,3 +1,4 @@
+import path from 'path';
 import express from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
@@ -21,6 +22,11 @@ app.use("/api/users", userRoutes);
 
 app.get( "/", (req, res) => {
     res.send("Server is running");
+});
+
+app.get('/', (req, res) => {
+    app.use(express.static(path.resolve(__dirname, 'frontend', 'build')))
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
 });
 
 
